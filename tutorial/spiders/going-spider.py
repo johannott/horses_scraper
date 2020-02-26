@@ -13,7 +13,9 @@ class GoingSpider(scrapy.Spider):
     def parse(self, response):
         
         going = response.css('td.mapinfoheader div::text')[2].get()
+        track = 'Cheltenham'
         loader = ItemLoader(item=GoingItem(), response=response)
+        loader.add_value('track', track)
         loader.add_value('going', going)
         yield loader.load_item()
 

@@ -21,6 +21,8 @@ def db_connect():
 
 
 def create_table(engine):
+    for _t in Base.metadata.tables:
+        print(_t)
     Base.metadata.create_all(engine)
 
 
@@ -36,6 +38,7 @@ class Going(Base):
     __tablename__ = "going"
 
     id = Column(Integer, primary_key=True)
+    track = Column('track', String(30))
     going = Column('going', String(30))
 
 

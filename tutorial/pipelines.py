@@ -34,10 +34,21 @@ class SaveGoingPipeline(object):
         """
         session = self.Session()
         going = Going()
+        going.track = item["track"]
         going.going = item["going"]
 
-        try:
+        # check whether the track exists
+        exist_track = session.query(Going).filter_by(track = going.track).first()
+        print('exist_track', exist_track)
+        if exist_track is not None:  # the current track exists
+            # do update
+            print('the current track exists - do update')
+            session.query(Going).update({"going": going.going})
+        else:
+            print('the current track does not exist - do add')
             session.add(going)
+            # do add
+        try:
             session.commit()
 
         except:
