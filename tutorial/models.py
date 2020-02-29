@@ -34,13 +34,19 @@ def create_table(engine):
 # )
 
 
-class Going(Base):
-    __tablename__ = "going"
+# class Going(Base):
+#     __tablename__ = "going"
+
+#     id = Column(Integer, primary_key=True)
+#     track = Column('track', String(30))
+#     going = Column('going', String(100))
+
+class Track(Base):
+    __tablename__ = "tracks"
 
     id = Column(Integer, primary_key=True)
-    track = Column('track', String(30))
-    going = Column('going', String(30))
-
+    track_name = Column('track_name', String(255))
+    current_going = Column('current_going', String(255))
 
 # class Quote(Base):
 #     __tablename__ = "quote"

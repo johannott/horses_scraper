@@ -99,5 +99,5 @@ DATABASE = {
     'port': '5432',
     'username': 'johannott',
     'password': 'liverpool',
-    'database': 'template1'
+    'database': 'postgres'
 }

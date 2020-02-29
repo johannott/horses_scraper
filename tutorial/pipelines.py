@@ -14,7 +14,7 @@
 from sqlalchemy.orm import sessionmaker
 from scrapy.exceptions import DropItem
 #from tutorial.models import Quote, Author, Tag, db_connect, create_table
-from tutorial.models import Going, db_connect, create_table
+from tutorial.models import Track, db_connect, create_table
 
 class SaveGoingPipeline(object):
     def __init__(self):
@@ -33,20 +33,20 @@ class SaveGoingPipeline(object):
         This method is called for every item pipeline component
         """
         session = self.Session()
-        going = Going()
-        going.track = item["track"]
-        going.going = item["going"]
+        track = Track()
+        track.track_name = item["track_name"]
+        track.current_going = item["current_going"]
 
         # check whether the track exists
-        exist_track = session.query(Going).filter_by(track = going.track).first()
+        exist_track = session.query(Track).filter_by(track_name = track.track_name).first()
         print('exist_track', exist_track)
         if exist_track is not None:  # the current track exists
             # do update
             print('the current track exists - do update')
-            session.query(Going).update({"going": going.going})
+            session.query(Track).filter(Track.track_name == track.track_name).update({"current_going": track.current_going})
         else:
             print('the current track does not exist - do add')
-            session.add(going)
+            session.add(track)
             # do add
         try:
             session.commit()

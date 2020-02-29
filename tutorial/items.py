@@ -51,6 +51,6 @@ class QuoteItem(Item):
         )
     tags = Field()
 
-class GoingItem(Item):
-    track = Field(output_processor=TakeFirst())
-    going = Field(output_processor=TakeFirst())
+class TrackItem(Item):
+    track_name = Field(output_processor=TakeFirst())
+    current_going = Field(output_processor=TakeFirst())
